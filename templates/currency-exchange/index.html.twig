@@ -1,0 +1,43 @@
+{% extends "./base.html.twig" %}
+
+{% block body %}
+    <div class="w-4/5 m-auto pt-40">
+        <h1 class="text-6xl text-center pb-12">
+            Get Median Exchange Rate
+        </h1>
+
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+        <button
+                type="submit"
+                class="uppercase mt-15 bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
+            Submit
+        </button>
+
+        {{ form_end(form) }}
+
+        <div class="mt-5">
+            {% if exchangeRateData is defined and exchangeRateData is not empty %}
+                <table class="table-auto">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Exchange Rate (EUR to RSD)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for exchangeRate in exchangeRateData %}
+                        <tr>
+                            <td>{{ exchangeRate.date }}</td>
+                            <td>{{ exchangeRate.rates.RSD }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+{#            {% else %}#}
+{#                <p>No exchange rate data available.</p>#}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
